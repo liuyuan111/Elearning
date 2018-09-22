@@ -1,0 +1,31 @@
+{% load i18n %}
+<nav class="pagination col-md-12">
+    <ul class="pagination__list">
+
+    {% if post_list.has_previous %}
+        <li>
+        <a href="?{{ post_list.previous_page_number.querystring }}" class="pagination__previous btn-squae ">&#8249;</a>
+        </li>
+    {% else %}
+        <a href="#" class="pagination__previous btn-squae disable">&#8249;</a>
+    {% endif %}
+    {% for page in post_list.pages %}
+        {% if page %}
+            {% ifequal page post_list.number %}
+                <li><span class="pagination__page btn-squae active">{{ page }}</span></li>
+            {% else %}
+                <li><a href="?{{ page.querystring }}" class="pagination__page btn-squae">{{ page }}</a></li>
+            {% endifequal %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    {% if post_list.has_next %}
+        <li><a rel="next" href="?{{ post_list.next_page_number.querystring }}" class="pagination__next btn-squae">&#8250;</a></li>
+    {% else %}
+        <li><a rel="next" href="#" class="pagination__next btn-squae disable">&#8250;</a></li>
+
+    {% endif %}
+
+</ul>
+</nav>

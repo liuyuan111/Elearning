@@ -1,0 +1,104 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<!-- WRAPPER-->
+<div id="wrapper-content"><!-- PAGE WRAPPER-->
+    <div id="page-wrapper"><!-- MAIN CONTENT-->
+        <div class="main-content"><!-- CONTENT-->
+            <div class="content">
+                <div class="section background-opacity page-title set-height-top">
+                    <div class="container">
+                        <div class="page-title-wrapper"><!--.page-title-content--><h2 class="captions">所有课程</h2>
+                            <ol class="breadcrumb">
+                                <li><a href="index.html">首页</a></li>
+                                <li class="active"><a href="#">课程</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section section-padding courses">
+                    <div class="container">
+                        <div class="group-title-index"><h2 class="center-title">课程列表</h2><!--.bottom-title<i class="bottom-icon icon-a-1-01"></i>--></div>
+                        <div class="courses-wrapper"><!-- Nav tabs-->
+                            <div class="row top-content">
+                                <div class="col-md-3">
+                                    <div class="result-output text-left"><p class="result-count">Showing <strong>1-6</strong> of total <strong>12</strong> courses</p></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul role="tablist" class="nav nav-tabs edugate-tabs">
+
+                                        {%for category in category_list %}
+                                              <!-- class="active" -->
+                                        {%if category_id == category.id %}
+                                        <li role="presentation" class="active"><a href="?category_id={{category.id}}"  class="text">{{category.title}}</a></li>
+                                        {%else%}
+                                          <li role="presentation"><a href="?category_id={{category.id}}"  class="text">{{category.title}}</a></li>
+                                        {%endif%}
+                                        {%endfor %}
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="btn-list-grid list-unstyled text-right">
+                                        <li class="active">
+                                            <button class="btn-grid"><i class="fa fa-th-large"></i></button>
+                                        </li>
+                                        <li>
+                                            <button class="btn-list"><i class="fa fa-th-list"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Tab panes-->
+                            <div class="tab-content courses-content">
+                                <div id="campus1" role="tabpanel" class="tab-pane fade in active">
+                                    <div class="style-show style-grid row">
+                                        <p>look here！</p>
+                                        {%for course in post_list.object_list %}
+                                        <div class="col-style">
+                                            <div class="edugate-layout-2">
+                                                <div class="edugate-layout-2-wrapper">
+                                                    <div class="edugate-content"><a href="courses-detail.html" class="title">{{course.title}}</a>
+
+                                                        <div class="info">
+                                                            <div class="author item"><a href="#">{{course.teacher.name}}</a></div>
+                                                            <div class="date-time item"><a href="#">{{course.pub_date}}</a></div>
+                                                        </div>
+                                                        <div class="info-more">
+                                                            <div class="view item"><i class="fa fa-user"></i>
+
+                                                                <p> {{course.learn_num}}</p></div>
+                                                            <div class="comment item"><i class="fa fa-comment"></i>
+
+                                                                <p> {{course.comment_num}}</p></div>
+                                                        </div>
+                                                        <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
+                                                        <div class="description">{{course.body}}</div>
+                                                        <a href="/course-detail/{{course.id}}"><button class="btn btn-green"><span>加入学习</span></button></a>
+                                                    </div>
+                                                    <div class="edugate-image"><img src="/{{course.cover}}" alt="" class="img-responsive"/></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {%endfor%}
+
+                                        {% include "_pagination.html" %}
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BUTTON BACK TO TOP-->
+    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+</div>
+
+{%endblock%}

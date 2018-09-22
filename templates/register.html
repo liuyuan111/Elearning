@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+
+{%block content%}
+<!-- WRAPPER-->
+<div id="wrapper-content"><!-- PAGE WRAPPER-->
+    <div id="page-wrapper"><!-- MAIN CONTENT-->
+        <div class="main-content"><!-- CONTENT-->
+            <div class="content">
+                <div class="page-register rlp">
+                    <div class="container">
+                        <div class="register-wrapper rlp-wrapper">
+                            <div class="register-table rlp-table"><a href="index.html"><img src="assets/images/logo-color-1.png" alt="" class="login"/></a>
+
+                                <div class="register-title rlp-title">创建一个账号，加入享学课堂!</div>
+
+                                <form class="" action="{% url 'register' %}" method="post">
+                                <div class="register-form bg-w-form rlp-form">
+                                    <div class="row">
+                                        <div class="col-md-6"><label for="regname" class="control-label form-label">姓名 <span class="highlight">*</span></label><input id="regname" type="text" name="username" placeholder="" class="form-control form-input"/><!--p.help-block Warning !--></div>
+                                        <div class="col-md-6"><label for="regemail" class="control-label form-label">Email <span class="highlight">*</span></label><input id="regemail" type="email" name="email" placeholder="" class="form-control form-input"/><!-- p.help-block Warning !--></div>
+                                        <div class="col-md-6"><label for="regpassword" class="control-label form-label">密码 <span class="highlight">*</span></label><input id="regpassword" type="password" name="password" placeholder="" class="form-control form-input"/><!-- p.help-block Warning !--></div>
+                                        <div class="col-md-6"><label for="reregpassword" class="control-label form-label">确认密码 <span class="highlight">*</span></label><input id="reregpassword" type="password" name="repassword" placeholder="" class="form-control form-input"/><!-- p.help-block Warning !--></div>
+                                    </div>
+                                </div>
+                                <div class="register-submit">
+                                    <button type="submit"  class="btn btn-register btn-green"><span>创建账号</span></button>
+                                </div>
+                                {% csrf_token %} 
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BUTTON BACK TO TOP-->
+    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+</div>
+{%endblock%}

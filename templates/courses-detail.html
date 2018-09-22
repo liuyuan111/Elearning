@@ -1,0 +1,205 @@
+{%extends 'base.html'%}
+
+
+{%block custom_css%}
+<link href="http://vjs.zencdn.net/5.19/video-js.css" rel="stylesheet">
+{%endblock%}
+
+{%block custom_js%}
+<script src="http://vjs.zencdn.net/5.19/video.js"></script>
+{%endblock%}
+
+
+{%block content%}
+<!-- WRAPPER-->
+<div id="wrapper-content"><!-- PAGE WRAPPER-->
+    <div id="page-wrapper"><!-- MAIN CONTENT-->
+        <div class="main-content"><!-- CONTENT-->
+            <div class="content">
+                <div class="section background-opacity page-title set-height-top">
+                    <div class="container">
+                        <div class="page-title-wrapper"><!--.page-title-content--><h2 class="captions">course detail</h2>
+                            <ol class="breadcrumb">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="categories.html">Categories</a></li>
+                                <li><a href="courses.html">Courses</a></li>
+                                <li class="active"><a href="#">Courses Detail</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section section-padding courses-detail">
+                    <div class="container">
+                        <div class="courses-detail-wrapper">
+                            <div class="row">
+                                <div class="col-md-9 layout-left">
+
+
+                                    <div class="course-video">
+                                      <video id="preview-player" class="video-js vjs-default-skin" width="847px" height="400px" controls preload="auto" >
+
+                                      </video>
+
+                                      <script type="text/javascript">
+                                          var player = videojs(document.querySelector('video'));
+
+                                          function play_video(url){
+                                            player.src(url);
+                                            player.play()
+                                          }
+                                      </script>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="course-syllabus">
+                                        <div class="course-syllabus-title underline">列表</div>
+                                        <div class="course-table">
+                                            <div class="outer-container">
+                                                <div class="inner-container">
+                                                    <div class="table-header">
+                                                        <table class="edu-table-responsive">
+                                                            <thead>
+                                                            <tr class="heading-table">
+                                                                <th class="col-1">标题</th>
+                                                                <th class="col-2">时长</th>
+                                                                <th class="col-3">状态</th>
+                                                            </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                    <div class="table-body">
+                                                        <table class="edu-table-responsive table-hover">
+                                                            <tbody>
+
+                                                            {%for section in course.section_set.all%}
+                                                            <tr class="heading-content">
+                                                                <td colspan="4" class="left heading-content">{{section.title}}</td>
+                                                            </tr>
+
+                                                            {%for video in section.video_set.all%}
+
+                                                            {% if video.is_free %}
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="javascript:play_video('http://localhost:8000/{{video.video}}')"><i class="mr18 fa fa-file-text"></i><span>{{video.title}}</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>{{video.play_time}}</span></td>
+
+                                                                <td class="col-3">
+                                                                    <div class="bg-yellow">免费</div>
+                                                                </td>
+                                                            </tr>
+                                                            {%else%}
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="javascript:play_video('http://localhost:8000/{{video.video}}')"><i class="mr18 fa fa-file-text"></i><span>{{video.title}}</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>{{video.play_time}}</span></td>
+
+                                                                <td class="bolder-color col-3"><i class="w27 fa fa-lock"></i><span>会员</span></td>
+                                                            </tr>
+                                                            <tr class="spacing-table">
+                                                                <td colspan="4"></td>
+                                                            </tr>
+                                                            {%endif%}
+                                                            {%endfor%}
+
+                                                            {%endfor%}
+
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 sidebar layout-right">
+                                    <div class="row">
+                                        <div class="course-price-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget"><p>{{course.price}}</p></div>
+                                            <div class="content-widget">
+                                                <div class="course-price-widget-wrapper">
+                                                    <div class="row">
+                                                        <div class="col-md-12 info-row col-sm-12 col-xs-12">
+                                                            <div class="pull-left title">时长:</div>
+                                                            <div class="pull-right">{{course.runtime}}</div>
+                                                        </div>
+                                                        <div class="col-md-12 info-row col-sm-12 col-xs-12">
+                                                            <div class="pull-left title">级别:</div>
+                                                            <div class="pull-right level">{{course.level}}</div>
+                                                        </div>
+                                                        <div class="col-md-12 info-row col-sm-12 col-xs-12">
+                                                            <div class="pull-left title">学习人数:</div>
+                                                            <div class="pull-right">{{course.learn_num}}</div>
+                                                        </div>
+                                                        <div class="col-md-12 info-row col-sm-12 col-xs-12">
+                                                            <div class="pull-left title">星级:</div>
+                                                            <div title="Rated 5.00 out of 5" class="pull-right star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-green"><span>加入学习</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="author-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">明星讲师</div>
+                                            <div class="content-widget">
+                                                <div class="staff-item author-widget-wrapper customize">
+                                                    <div class="staff-item-wrapper">
+                                                        <div class="staff-info"><a href="#" class="staff-avatar"><img src="/{{course.teacher.face}}" alt="" class="img-responsive"/></a><a href="#" class="staff-name">{{course.teacher.name}}</a>
+
+                                                            <div class="staff-job">{{course.teacher.title}}</div>
+                                                            <div class="staff-desctiption">{{course.teacher.infor}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="staff-socials"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google-plus"></i></a><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="popular-course-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">热门课程</div>
+                                            <div class="content-widget">
+
+                                                {%for course in course_list%}
+                                                <div class="media">
+                                                    <div class="media-left"><a href="{%url 'course-detail' course.id %}" class="link"><img src="/{{course.cover}}" alt="" class="media-image"/></a></div>
+                                                    <div class="media-right">
+                                                        <div class="cur">{{course.price}}</div>
+                                                        <a href="{%url 'course-detail' course.id %}" class="link title">{{course.title}}</a>
+                                                        <br>
+                                                        <div class="info">
+                                                            <div class="author item"><a href="#"><span>{{course.teacher.name}}</span></a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {%endfor%}
+
+                                            </div>
+                                        </div>
+                                        <div class="category-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">分类</div>
+                                            <div class="content-widget">
+                                                <ul class="category-widget list-unstyled">
+                                                    {%for category in category_list%}
+                                                    <li><a href="{% url 'course' %}?category_id={{category.id}}" class="link cat-item"><span class="pull-left">{{category.title}}</span><span class="pull-right">{{category.course_set.count}}</span></a></li>
+                                                    {%endfor%}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BUTTON BACK TO TOP-->
+    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+</div>
+{%endblock%}

@@ -1,0 +1,402 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<!-- WRAPPER-->
+<div id="wrapper-content"><!-- PAGE WRAPPER-->
+    <div id="page-wrapper"><!-- MAIN CONTENT-->
+        <div class="main-content"><!-- CONTENT-->
+            <div class="content"><!-- SLIDER BANNER-->
+                <div class="section slider-banner set-height-top">
+
+                    {% for banner in banner_list %}
+                    <div class="slider-item">
+                        <div class="slider-1" style="background-image: url(/{{banner.cover}});">
+                            <div class="slider-caption">
+                                <div class="container"><h5 class="text-info-2">{{banner.text_info2}}</h5>
+
+                                    <h1 class="text-info-1">{{banner.text_info1}}</h1>
+
+                                    <p class="text-info-3">{{banner.text_info3}}</p>
+                                    <a href="/course-detail/{{course.id}}"><button class="btn btn-green"><span>加入学习</span></button></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+
+                </div>
+                <!-- CHOOSE COURSES-->
+                <div class="section section-padding choose-course">
+                    <div class="container">
+                        <div class="group-title-index">
+                            <h2 class="center-title">选择一个课程方向</h2>
+                            <div class="bottom-title"><i class="bottom-icon icon-a-1-01-01"></i></div>
+                        </div>
+
+                        <div class="choose-course-wrapper row">
+
+                            {%for category in category_list%}
+                            <div class="col-md-4 col-xs-6">
+                                <div class="item-course item-1">
+                                    <div class="icon-circle">
+                                        <div class="icon-background"><i class="icons-img icon-globe"></i></div>
+                                        <div class="info">
+                                            <div class="info-back"><a href="courses.html">{{category.infor}}</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="name-course"><a href="courses.html">{{category.title}}</a><i class="fa fa-long-arrow-right"></i></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+
+                        </div>
+                    </div>
+                </div>
+                <!-- PROGRESS BARS-->
+                <div class="section progress-bars section-padding">
+                    <div class="container">
+                        <div class="progress-bars-content">
+                            <div class="progress-bar-wrapper"><h2 class="title-2">享学数据统计</h2>
+
+                                <div class="row">
+                                    <div class="content">
+                                        <div class="col-sm-3">
+                                            <div class="progress-bar-number">
+                                                <div data-from="0" data-to="{{teacher_count}}" data-speed="1000" class="num">0</div>
+                                                <p class="name-inner">讲师</p></div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="progress-bar-number">
+                                                <div data-from="0" data-to="{{course_count}}" data-speed="1000" class="num">0</div>
+                                                <p class="name-inner">课程</p></div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="progress-bar-number">
+                                                <div data-from="0" data-to="{{user_count}}" data-speed="1000" class="num">0</div>
+                                                <p class="name-inner">会员</p></div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="progress-bar-number">
+                                                <div data-from="0" data-to="{{category_count}}" data-speed="1000" class="num">0</div>
+                                                <p class="name-inner">课程方向</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-button">
+                                    <button onclick="window.location.href='categories.html'" class="btn btn-transition-3"><span>购买课程</span></button>
+                                    <button onclick="window.location.href='about-us.html'" class="btn btn-green-3"><span>查看课程</span></button>
+                                </div>
+                                <div class="group-btn-slider">
+                                    <div class="btn-prev"><i class="fa fa-angle-left"></i></div>
+                                    <div class="btn-next"><i class="fa fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- TOP COURSES-->
+                <div class="section section-padding top-courses">
+                    <div class="container">
+                        <div class="group-title-index">
+
+                            <h2 class="center-title">最新发布</h2>
+
+                            <div class="bottom-title"><i class="bottom-icon icon-icon-04"></i></div>
+                        </div>
+                        <div class="top-courses-wrapper">
+                            <div class="top-courses-slider">
+                                {%for course in course_list %}
+                                <div class="top-courses-item">
+                                    <div class="edugate-layout-2">
+                                        <div class="edugate-layout-2-wrapper">
+                                            <div class="edugate-content"><a href="courses-detail.html" class="title">{{course.title}}</a>
+
+                                                <div class="info">
+                                                    <div class="author item"><a href="#">{{course.teacher.name}}</a></div>
+                                                    <div class="date-time item"><a href="#">{{courses.pub_date}}</a></div>
+                                                </div>
+                                                <div class="info-more">
+                                                    <div class="view item"><i class="fa fa-user"></i>
+
+                                                        <p> {{course.learn_num}}</p></div>
+                                                    <div class="comment item"><i class="fa fa-comment"></i>
+
+                                                        <p> {{course.comment_num}}</p></div>
+                                                </div>
+                                                <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
+                                                <div class="description">{{course.body}}</div>
+                                                <a href="/course-detail/{{ course.id }}"><button  class="btn btn-green"><span>加入学习</span></button></a>
+                                            </div>
+                                            <div class="edugate-image"><img src="/{{course.cover}}" alt="" class="img-responsive"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {%endfor%}
+                            </div>
+
+                            <div class="group-btn-top-courses-slider">
+                                <div class="btn-prev">&lsaquo;</div>
+                                <div class="btn-next">&rsaquo;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- WHY CHOOSE US-->
+                <div class="section why-choose-us">
+                    <div class="why-choose-us-wrapper-top">
+                        <div class="container">
+                            <div class="why-choose-us-wrapper"><h2 class="title-2">为什么选择享学课堂?</h2>
+
+                                <p>18年开发经验老司机保驾护航，课程精心录制，基础深入浅出，真实的企业项目.</p>
+                                <button onclick="window.location.href='categories.html'" class="btn btn-green-2"><span>现在加入</span></button>
+                            </div>
+                            <div data-wow-delay="0.2s" data-wow-duration="1.2s" class="background-girl-1 wow fadeInUp"><img src="/static/assets/images/girl-1.png" alt="" class="img-responsive"/></div>
+                        </div>
+                    </div>
+                    <div class="why-choose-us-wrapper-bottom background-opacity">
+                        <div class="container">
+                            <div data-wow-delay="0.4s" data-wow-duration="1s" class="row why-choose-us-wrapper wow zoomIn">
+                                <div class="customs-row">
+                                    <div class="col-sm-4 col-xs-6 section-icon"><i class="fa fa-pencil-square-o"></i>
+
+                                        <p> 超过600免费教程</p></div>
+                                    <div class="col-sm-4 col-xs-6 section-icon"><i class="fa fa-compress"></i>
+
+                                        <p> 不满意，全额退费</p></div>
+                                </div>
+                                <div class="customs-row">
+                                    <div class="col-sm-4 col-xs-6 section-icon"><i class="fa fa-paper-plane"></i>
+
+                                        <p> 随时随地学习，没有时空限制</p></div>
+                                    <div class="col-sm-4 col-xs-6 section-icon"><i class="fa fa-folder-open"></i>
+
+                                        <p> 超过3000本电子书可用</p></div>
+                                </div>
+                                <div class="customs-row">
+                                    <div class="col-sm-4 col-xs-6 section-icon"><i class="fa fa-external-link"></i>
+
+                                        <p> 免费享受课程升级</p></div>
+                                    <div class="col-sm-4 col-xs-6 section-icon"><i class="fa fa-stumbleupon-circle"></i>
+
+                                        <p> 灵活的付款方式</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PRICING-->
+                <div class="section section-padding pricing">
+                    <div class="container">
+                        <div class="group-title-index"><h4 class="top-title">选择一个适合你的学习计划</h4>
+
+                            <h2 class="center-title">最好的课程，最低的价格！</h2>
+
+                            <div class="bottom-title"><i class="bottom-icon icon-a-1-01-01"></i></div>
+                        </div>
+                        <div class="row">
+                            <div class="pricing-wrapper">
+                                <div class="col-sm-4">
+                                    <div class="pricing-widget">
+                                        <div class="pricing-header">
+                                            <div class="price-cost">
+                                                <div class="inner"><p data-from="0" data-to="0" data-speed="1000" class="inner-number">0</p></div>
+                                            </div>
+                                        </div>
+                                        <div class="pricing-content"><h3 class="pricing-title">免费会员</h3>
+
+                                            <p class="pricing-subtitle">30 天免费学习</p>
+                                            <ul class="pricing-list">
+                                                <li><p><strong>1天</strong> 免费</p></li>
+                                                <li><p><strong>限制</strong> 课程</p></li>
+                                                <li><p><strong>免费</strong> 3个课时</p></li>
+                                                <li><p><strong>没有</strong> 服务</p></li>
+                                                <li><p><strong>没有</strong> 电子书</p></li>
+                                                <li><p><strong>没有</strong> 教程</p></li>
+                                                <li><p><strong>限制</strong> 注册用户</p></li>
+                                            </ul>
+                                            <div class="pricing-button"><a href="#">选择该计划</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="pricing-widget main active">
+                                        <div class="pricing-header">
+                                            <div class="price-cost">
+                                                <div class="inner"><p data-from="0" data-to="35" data-speed="1000" class="inner-number">0</p></div>
+                                            </div>
+                                        </div>
+                                        <div class="pricing-content"><h3 class="pricing-title">年会员</h3>
+
+                                            <p class="pricing-subtitle">1年有效学习时间</p>
+                                            <ul class="pricing-list">
+                                                <li><p><strong>1年</strong> 有效学习时间</p></li>
+                                                <li><p><strong>限制</strong> 课程</p></li>
+                                                <li><p><strong>300+</strong> 课时</p></li>
+                                                <li><p><strong>随机</strong> 服务</p></li>
+                                                <li><p><strong>浏览</strong> 电子书</p></li>
+                                                <li><p><strong>标准</strong> 教程</p></li>
+                                                <li><p><strong>无限制</strong> 注册用户</p></li>
+                                            </ul>
+                                            <div class="pricing-button"><a href="#">选择该计划</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="pricing-widget">
+                                        <div class="pricing-header">
+                                            <div class="price-cost">
+                                                <div class="inner"><p data-from="0" data-to="89" data-speed="1000" class="inner-number">0</p></div>
+                                            </div>
+                                        </div>
+                                        <div class="pricing-content"><h3 class="pricing-title">终身会员</h3>
+
+                                            <p class="pricing-subtitle">无时间限制</p>
+                                            <ul class="pricing-list">
+                                                <li><p><strong>任何时间</strong> 都能访问</p></li>
+                                                <li><p><strong>不限制</strong> 课程</p></li>
+                                                <li><p><strong>3000+</strong> 课时和更新</p></li>
+                                                <li><p><strong>免费</strong> 服务</p></li>
+                                                <li><p><strong>免费</strong> 电子书下载</p></li>
+                                                <li><p><strong>超级</strong> 教程</p></li>
+                                                <li><p><strong>无限制</strong> 注册用户</p></li>
+                                            </ul>
+                                            <div class="pricing-button"><a href="#">选择该计划</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-btn-slider">
+                            <div class="btn-prev"><i class="fa fa-angle-left"></i></div>
+                            <div class="btn-next"><i class="fa fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SLIDER TALK ABOUT US-->
+                <div class="section background-opacity slider-talk-about-us">
+                    <div class="container">
+                        <div id="people-talk" data-ride="carousel" data-interval="5000" class="slider-talk-about-us-wrapper carousel slide">
+                            <div role="listbox" class="slider-talk-about-us-content carousel-inner">
+                                {%for stu in  starstudent_list %}
+                                {% if forloop.counter == 1 %}
+                                <div class="peopel-item item active"><p class="peopel-comment">{{stu.comment}}</p>
+
+                                    <div class="group-peole-info">
+                                        <div class="peopel-avatar"><img src="/{{stu.head_img}}" alt="" class="img-responsive"/></div>
+                                        <div class="peopel-name">{{stu.name}}</div>
+                                        <div class="people-job">{{stu.company}}</div>
+                                    </div>
+                                </div>
+                                {%else %}
+                                <div class="peopel-item item"><p class="peopel-comment">{{stu.comment}}</p>
+                                    <div class="group-peole-info">
+                                        <div class="peopel-avatar"><img src="/{{stu.head_img}}" alt="" class="img-responsive"/></div>
+                                        <div class="peopel-name">{{stu.name}}</div>
+                                        <div class="people-job">{{stu.company}}</div>
+                                    </div>
+                                </div>
+                                {%endif%}
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-btn-slider"><a href="#people-talk" role="button" data-slide="prev">
+                        <div class="btn-prev carousel-control left"><i class="fa fa-angle-left"></i></div>
+                    </a><a href="#people-talk" role="button" data-slide="next">
+                        <div class="btn-next carousel-control right"><i class="fa fa-angle-right"></i></div>
+                    </a></div>
+                </div>
+
+                <!--LATEST NEW-->
+                <div class="section section-padding latest-news">
+                    <div class="container">
+                        <div class="group-title-index">
+
+                            <h2 class="center-title">最新博客</h2>
+
+                            <div class="bottom-title"><i class="bottom-icon icon-a-01-01"></i></div>
+                        </div>
+                        <div class="latest-news-wrapper">
+
+                            {%for blog in blog_list%}
+                            <div class="edugate-layout-1">
+                                <div class="edugate-image"><img src="/{{blog.cover}}" alt="" class="img-responsive"/></div>
+                                <div class="edugate-content"><a href="news-detail.html" class="title">{{blog.title}}</a>
+
+                                    <div class="info">
+                                        <div class="author item"><a href="#">{{blog.user.username}}</a></div>
+                                        <div class="date-time item"><a href="#">{{blog.pub_date}}</a></div>
+                                    </div>
+                                    <div class="info-more">
+                                        <div class="view item"><i class="fa fa-user"></i>
+
+                                            <p> {{blog.views}}</p></div>
+                                        <div class="comment item"><i class="fa fa-comment"></i>
+
+                                            <p> {{blog.comment_set.count}}</p></div>
+                                    </div>
+                                    <div class="description">{{blog.content}}</div>
+                                    <button onclick="window.location.href='news-detail.html'" class="btn btn-green"><span>查看详细</span></button>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            <button class="btn btn-green btn-latest-new"><span>所有博客<i class="fa fa-long-arrow-right"></i></span></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- BEST STAFF-->
+                <div class="section section-padding background-opacity best-staff">
+                    <div class="container">
+                        <div class="group-title-index">
+
+                            <h2 class="center-title">享学名师</h2>
+
+                            <div class="bottom-title"><i class="bottom-icon icon-icon-05"></i></div>
+                        </div>
+                        <div class="best-staff-wrapper">
+                            <div class="best-staff-content">
+
+                                {%for teacher in teacher_list%}
+                                <div class="staff-item">
+                                    <div class="staff-item-wrapper">
+                                        <div class="staff-info"><a href="#" class="staff-avatar"><img src="/{{teacher.face}}" alt="" class="img-responsive"/></a><a href="#" class="staff-name">{{teacher.name}}</a>
+
+                                            <div class="staff-job">{{teacher.title}}</div>
+                                            <div class="staff-desctiption">{{teacher.infor}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="staff-socials"><a href="#" class="facebook"><i class="fa fa-wechat"></i></a><a href="#" class="google"><i class="fa fa-qq"></i></a><a href="#" class="twitter"><i class="fa fa-weibo"></i></a></div>
+                                </div>
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-btn-slider">
+                        <div class="btn-prev"><i class="fa fa-angle-left"></i></div>
+                        <div class="btn-next"><i class="fa fa-angle-right"></i></div>
+                    </div>
+                </div>
+
+                <!-- SLIDER LOGO-->
+                <div class="section slider-logo">
+                    <div class="container">
+                        <div class="slider-logo-wrapper">
+                            <div class="slider-logo-content">
+                                <div class="carousel-logos owl-carousel">
+                                    {%for org in org_list%}
+                                    <div class="logo-iteam item"><a href="#"><img src="/{{org.cover}}" alt="" class="img-responsive"/></a></div>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BUTTON BACK TO TOP-->
+    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+</div>
+
+{% endblock%}

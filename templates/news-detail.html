@@ -1,0 +1,179 @@
+{%extends 'base.html'%}
+{%block content%}
+<div id="wrapper-content"><!-- PAGE WRAPPER-->
+    <div id="page-wrapper"><!-- MAIN CONTENT-->
+        <div class="main-content"><!-- CONTENT-->
+            <div class="content">
+                <div class="section background-opacity page-title set-height-top">
+                    <div class="container">
+                        <div class="page-title-wrapper"><h2 class="captions">新闻 &amp; 博客</h2>
+                            <ol class="breadcrumb">
+                                <li><a href="index.html">首页</a></li>
+                                <li><a href="news.html">博客</a></li>
+                                <li class="active"><a href="#">详细</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="section nav-subscribe">
+                    <div class="container">
+                        <div class="nav-subscribe-wrapper">
+                            <div class="nav-subscribe-left"><p class="subscribe-text news-detail-subscribe">享学课堂 <b class="focus">Python开发</b> 最好的课程！</p></div>
+                            <div class="nav-subscribe-right">
+                                <button class="btn btn-green btn-bold"><span>购买会员</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section section-padding news-detail">
+                    <div class="container">
+                        <div class="news-detail-wrapper">
+                            <div class="row">
+                                <div class="col-md-9 col-sm-12">
+                                    <div class="news-detail">
+
+                                        <h1 class="title-news">{{blog.title}}</h1>
+
+                                        <div class="info">
+                                            <div class="author item"><a href="#"><span>{{blog.user.username}}</span></a></div>
+                                            <div class="category item"><a href="#">{{blog.category.name}}</a></div>
+                                            <div class="comment item"><a href="#"><span>{{blog.comment_set.count}}</span><span>&nbsp;评</span></a></div>
+                                            <div class="date-time item"><a href="#"><span>&nbsp;</span><span>{{blog.pub_date}}</span></a></div>
+                                            <div class="like item"><a href="#"><span>{{blog.views}}</span><span>&nbsp;阅</span></a></div>
+                                            <div class="share item"><a href="#">分享</a></div>
+                                        </div>
+                                        <div class="news-content">
+
+                                            <div class="text-news">
+                                              <p>{{blog.content}}</p>
+                                            </div>
+
+                                            <div class="news-tag">
+                                                <ul class="tag-list list-unstyled">
+                                                    <li><i class="fa fa-tag"></i></li>
+                                                    {%for tag in blog.tags.all%}
+
+                                                    <li><a href="#" class="tag-item">{{tag.name}}</a></li>
+                                                    {%endfor%}
+
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="news-comment">
+                                            <div class="news-comment-title underline">评论</div>
+                                            <ul class="comment-list list-unstyled">
+
+                                                {% for comment in blog.comment_set.all%}
+                                                <li class="media">
+                                                    <div class="list-item">
+                                                        <!-- <div class="media-left"><a href="#" class="media-image"><img src="assets/images/people-avatar-7.png" alt=""/></a></div> -->
+                                                        <div class="media-body">
+                                                            <div class="pull-left">
+                                                                <div class="info">
+                                                                    <div class="reader item"><a href="#">{{comment.user.username}}</a></div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="clearfix"></div>
+                                                            <div class="time">{{comment.pub_date}}</div>
+                                                            <div class="des"><p>{{comment.content}}</p></div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                {%endfor%}
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="comment-write">
+                                            <div class="comment-write-title underline">写评论</div>
+                                            <form action="{% url 'comment' blog.id %}" class="form-comment" method="post">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="contact-question form-group"><textarea class="form-control form-input" name='content'></textarea></div>
+                                                    </div>
+                                                </div>
+                                                <div class="contact-submit">
+                                                    <button type="submit" class="btn btn-green btn-bold"><span>评论</span></button>
+                                                </div>
+                                                {%csrf_token%}
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 sidebar layout-right">
+                                    <div class="row">
+                                        <div class="recent-post-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">最新博客</div>
+                                            <div class="content-widget">
+
+                                                {% for blog in latest_blog_list%}
+                                                <div class="media">
+                                                    <div class="media-left"><a href="courses-detail.html" class="link"><img src="/{{blog.cover}}" alt="" class="media-image"/></a></div>
+                                                    <div class="media-right">
+                                                        <div class="info">
+                                                            <div class="date-created item"><a href="#"><span>{{blog.pub_date}}</span></a></div>
+                                                        </div>
+                                                        <a href="courses-detail.html" class="link comment"><i class="fa fa-comment"></i><span>{{blog.comment_set.count}}</span></a><a href="courses-detail.html" class="link title">{{blog.title}}</a></div>
+                                                </div>
+                                                {%endfor%}
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="popular-course-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">热门课程</div>
+                                            <div class="content-widget">
+
+                                                {%for course in course_list%}
+                                                <div class="media">
+                                                    <div class="media-left"><a href="{%url 'course-detail' course.id %}" class="link"><img src="/{{course.cover}}" alt="" class="media-image"/></a></div>
+                                                    <div class="media-right">
+                                                        <div class="cur">{{course.price}}</div>
+                                                        <a href="{%url 'course-detail' course.id %}" class="link title">{{course.title}}</a>
+                                                        <br>
+                                                        <div class="info">
+                                                            <div class="author item"><a href="#"><span>{{course.teacher.name}}</span></a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {%endfor%}
+
+                                            </div>
+                                        </div>
+                                        <div class="category-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">分类</div>
+                                            <div class="content-widget">
+                                                <ul class="category-widget list-unstyled">
+                                                    {%for category in category_list%}
+                                                    <li><a href="{% url 'course' %}?category_id={{category.id}}" class="link cat-item"><span class="pull-left">{{category.title}}</span><span class="pull-right">{{category.course_set.count}}</span></a></li>
+                                                    {%endfor%}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="tag-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">博客标签</div>
+                                            <div class="content-widget">
+                                                <ul class="tag-widget list-unstyled">
+                                                    {%for tag in tag_list%}
+                                                    <li><a href="#" class="tag-item">{{tag.name}}</a></li>
+                                                    {%endfor%}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BUTTON BACK TO TOP-->
+    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+</div>
+{%endblock%}
